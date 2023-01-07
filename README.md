@@ -43,7 +43,54 @@ _work_in_progress_
 
 ### Youtube
 
+![Blockchain and Cryptocurrency in Java playlist](BlockchainAndCryptocurrency Thumbnail.png)
+
 [Blockchain and Cryptocurrency in Java playlist](https://www.youtube.com/playlist?list=PLQDzPczdXrTjU7O6HAKDgm_mLvlDqFl3Y)
 
 ---
+
+## Part I - Blockchain
+
+### Blockchain - The Big Picture
+
+#### Blockchain Demystified
+
+Suppose I want to buy a computer from one of my colleague in my office. The colleague wants to sell it as she is moving
+to other location. So, to make the transaction (buying and selling) - normal procedure is to have a centralized third
+party system (like banks) where the transaction can be recorded, i.e. money transferred from my account to her account.
+This transaction will be recorded as bank statements in my account and her credited bank account.
+
+Imagine a world where I can send money directly to my colleague without a bank – in seconds instead of days, and I don’t
+pay any exorbitant bank fees.
+
+Or one where I store money in an online wallet not tied to a bank, meaning I am my own bank and have complete control
+over my money. I don’t need a bank’s permission to access or move it, and never have to worry about a third party taking
+it away, or a government’s economic policy manipulating it.
+
+This is not a world of the future; it is a world that an avid but growing number of early adopters live in right now.
+And these are just a few of the important blockchain technology use cases that are transforming the way we trust and
+exchange value.
+
+Blockchain technology wants to get rid of this centralized systems and make the whole transaction decentralized and
+distributed. A decentralized network offers multiple benefits over the traditional centralized network, including
+increased system reliability and privacy. Moreover, such networks are much easier to scale and deal with no real single
+point of failure. The reason why Blockchain is distributed is because of shared communication and distributed
+processing.
+
+![Blockchain Decentralized](Blockchain1.png)
+
+So me and my colleague can do the transaction in the blockchain network of computer buyers and sellers. Blockchain is
+a **trust-less** system without any third party => the blockchain itself guarantees trust.
+
+A peer-to-peer (P2P) network is a simple network of computers. Here each computer acts as a node for file sharing within
+the formed network. Here each node acts as a server and thus there is no central server in the network. This allows the
+sharing of a huge amount of data. The tasks are equally divided amongst the nodes. Each node connected in the network
+shares an equal workload. For the network to stop working, all the nodes need to individually stop working. This is
+because each node works independently.
+
+The P2P architecture of Blockchains provides several benefits, such as greater security compared to traditional
+client-server-based networks. A distributed P2P network, paired with a majority of consensus requirement, provides
+Blockchains a relatively high degree of resistance to malicious activities.
+
+![Blockchain Properties](Blockchain2.png)
 
