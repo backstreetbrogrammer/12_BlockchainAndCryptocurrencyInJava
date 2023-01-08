@@ -43,7 +43,7 @@ _work_in_progress_
 
 ### Youtube
 
-![Blockchain and Cryptocurrency in Java playlist](BlockchainAndCryptocurrency Thumbnail.png)
+![Blockchain and Cryptocurrency in Java playlist](BlockchainAndCryptocurrencyThumbnail.png)
 
 [Blockchain and Cryptocurrency in Java playlist](https://www.youtube.com/playlist?list=PLQDzPczdXrTjU7O6HAKDgm_mLvlDqFl3Y)
 
