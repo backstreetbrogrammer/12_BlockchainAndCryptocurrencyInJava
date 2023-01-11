@@ -31,9 +31,10 @@ technology — a distributed ledger enforced by a disparate network of computers
     - Bitcoin example
     - Key elements of a Blockchain
     - Disadvantages of a Blockchain
-2. Hash Function
-3. Decentralized Ledger
-4. Blockchain - Mining
+2. IntelliJ Project Setup
+3. Hash Function
+4. Decentralized Ledger
+5. Blockchain - Mining
 
 _work_in_progress_
 
@@ -254,5 +255,153 @@ adoption, which can hugely benefit everyone, including the financial system.
 
 ---
 
-### Chapter 02 - Hash Function
+### Chapter 02 - IntelliJ Project Setup
+
+#### 2.1 JDK, Maven and IntelliJ installation
+
+- **JDK 11 download**: https://jdk.java.net/archive/
+
+  Windows zip: https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip
+
+- **Maven download**: https://maven.apache.org/download.cgi
+
+  Windows zip: https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip
+
+- **IntelliJ IDEA download**: https://www.jetbrains.com/idea/download/#section=windows
+
+  Windows: https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC
+
+- Set JAVA_HOME, M2_HOME, MAVEN_HOME system variables and set in PATH
+
+#### 2.2 IntelliJ Project Setup - Maven
+
+We can create a Maven project and add required dependencies.
+
+```
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit-platform.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-platform.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+```
+
+Complete `pom.xml` can be found at Github:
+[pom.xml](https://github.com/backstreetbrogrammer/12_BlockchainAndCryptocurrencyInJava/blob/main/pom.xml)
+
+Run Maven Verify command to ensure Maven setup is complete: `mvn verify`
+
+---
+
+### Chapter 03 - Hash Function
+
+**Hashing** is the process of scrambling raw information to the extent that it cannot reproduce it back to its original
+form. It takes a piece of information and passes it through a function that performs mathematical operations on the
+plaintext. This function is called the **hash function**, and the output is called the **hash value** or **digest**.
+
+![Hash Function](Hash1.png)
+
+The **SHA** (Secure Hash Algorithm) is one of the popular cryptographic hash functions. A cryptographic hash can be used
+to make a signature for a text or a data file.
+
+**SHA-256** is a part of the [SHA-2](https://en.wikipedia.org/wiki/SHA-2) family of algorithms.
+
+Java supports the following **SHA-2** algorithms:
+
+- SHA-224
+- SHA-256
+- SHA-384
+- SHA-512
+- SHA-512/224
+- SHA-512/256
+
+The **SHA-256** produces a **256-bit (32 bytes)** output, while **SHA-512** produces a **512-bit (64 bytes)** output.
+This is a one-way function, so the result cannot be decrypted back to the original value.
+
+[SHA-3](https://en.wikipedia.org/wiki/SHA-3) is the latest secure hashing standard after **SHA-2**. Compared to SHA-2,
+SHA-3 provides a different approach to generate a unique one-way hash, and it can be much faster on some hardware
+implementations. Similar to SHA-256, SHA3-256 is the 256-bit fixed-length algorithm in SHA-3.
+
+Java supports the following **SHA-3** algorithms:
+
+- SHA3-224
+- SHA3-256
+- SHA3-384
+- SHA3-512
+
+Blockchain use hash-pointers to reference the previous node in the linked list. Also, each block is assigned a unique
+hash value by which the block is identified. Bitcoin uses SHA-256 algorithm.
+
+Hexadecimal can have 16 possible values: [0:9] and [A:F] which can be represented on **4-bits** (2 x 4 = 16). Thus,
+SHA-256 algorithm can have an output of **64-character hexadecimal string** (64 x 4 = 256).
+
+Hashing algorithms characteristics:
+
+- **consistent**: same input should always give the same output hash value
+- **irreversible**: output hash value cannot be decrypted back to the original input value
+
+A good hash algorithm should be collision-free and a very small input value change should result in a completely
+different output hash value.
+
 
