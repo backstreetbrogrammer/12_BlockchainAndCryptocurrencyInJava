@@ -33,7 +33,7 @@ technology — a distributed ledger enforced by a disparate network of computers
     - Disadvantages of a Blockchain
 2. IntelliJ Project Setup
 3. Hash Function
-4. Decentralized Ledger
+4. The Ledger
 5. Blockchain - Mining
 
 _work_in_progress_
@@ -404,4 +404,7 @@ Hashing algorithms characteristics:
 A good hash algorithm should be collision-free and a very small input value change should result in a completely
 different output hash value.
 
+---
+
+### Chapter 04 - The Ledger
 

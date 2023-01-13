@@ -5,11 +5,16 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SHAAlgorithmsTest {
 
@@ -66,6 +71,39 @@ public class SHAAlgorithmsTest {
     }
 
     @Test
+    @DisplayName("Test all SHA2 algorithms")
+    void testAllSHA2Algorithms() throws NoSuchAlgorithmException {
+        for (final var sha2Algorithm : SHA2Algorithms.values()) {
+            final var digest = MessageDigest.getInstance(sha2Algorithm.getAlgorithm());
+            final var encodedHash = digest.digest(originalString.getBytes(StandardCharsets.UTF_8));
+            final var hashValue = bytesToHex(encodedHash);
+            System.out.printf("SHA2 algorithm=%s%nHash value=%s%nHash length (bits)=%d%n", sha2Algorithm.getAlgorithm(),
+                              hashValue,
+                              hashValue.length() * 4);
+            System.out.println("-------------------------------");
+        }
+    }
+
+    @Test
+    @DisplayName("Test create SHA-256 algorithm hash value for a file")
+    void testSHA256HashValueForFile() throws NoSuchAlgorithmException, IOException {
+        final var filePath = Path.of("src", "test", "resources", "dataFile.txt").toString();
+        var digest = MessageDigest.getInstance(SHA2Algorithms.SHA256.getAlgorithm());
+
+        try (final var dis = new DigestInputStream(new FileInputStream(filePath), digest)) {
+            while (dis.read() != -1) {
+                // do nothing - just to clear the data
+            }
+            digest = dis.getMessageDigest();
+        }
+
+        final var encodedHash = digest.digest();
+        final var hashValue = bytesToHex(encodedHash);
+        assertEquals(64, hashValue.length());
+        System.out.println(hashValue);
+    }
+
+    @Test
     @DisplayName("Test basic SHA3-256 algorithm is consistent")
     void testSHA3_256AlgorithmConsistency() throws NoSuchAlgorithmException {
         final var digest = MessageDigest.getInstance(SHA3Algorithms.SHA3_256.getAlgorithm());
@@ -92,9 +130,30 @@ public class SHAAlgorithmsTest {
         System.out.println(hashValueJdk);
 
         // using Apache Commons Codecs
-        final var hashValueCodecs = new DigestUtils(SHA3Algorithms.SHA3_256.getAlgorithm())
-                .digestAsHex(originalString);
+        final var hashValueCodecs = DigestUtils.sha3_256Hex(originalString);
         assertEquals(hashValueJdk, hashValueCodecs);
+    }
+
+    @Test
+    @DisplayName("Test all SHA3 algorithms")
+    void testAllSHA3Algorithms() throws NoSuchAlgorithmException {
+        for (final var sha3Algorithm : SHA3Algorithms.values()) {
+            final var digest = MessageDigest.getInstance(sha3Algorithm.getAlgorithm());
+            final var encodedHash = digest.digest(originalString.getBytes(StandardCharsets.UTF_8));
+            final var hashValue = bytesToHex(encodedHash);
+            System.out.printf("SHA3 algorithm=%s%nHash value=%s%nHash length (bits)=%d%n", sha3Algorithm.getAlgorithm(),
+                              hashValue,
+                              hashValue.length() * 4);
+            System.out.println("-------------------------------");
+        }
+    }
+
+    @Test
+    @DisplayName("Test unknown SHA algorithm should throw Exception")
+    void testUnknownSHAAlgorithmShouldThrowException() {
+        final var exception = assertThrows(NoSuchAlgorithmException.class,
+                                           () -> MessageDigest.getInstance("SHA4-256"));
+        assertEquals(exception.getMessage(), "SHA4-256 MessageDigest not available");
     }
 
 }
