@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -154,6 +156,32 @@ public class SHAAlgorithmsTest {
         final var exception = assertThrows(NoSuchAlgorithmException.class,
                                            () -> MessageDigest.getInstance("SHA4-256"));
         assertEquals(exception.getMessage(), "SHA4-256 MessageDigest not available");
+    }
+
+    @Test
+    @DisplayName("Test SHA algorithms with Salt")
+    void testSHAAlgorithmsWithSalt() throws NoSuchAlgorithmException {
+        final var salt = getRandomNonce(16);
+        final var originalData = originalString.getBytes(StandardCharsets.UTF_8);
+
+        final var input = ByteBuffer.allocate(salt.length + originalData.length)
+                                    .put(salt)
+                                    .put(originalData)
+                                    .array();
+
+        final var digest = MessageDigest.getInstance(SHA2Algorithms.SHA256.getAlgorithm());
+        final var encodedHash = digest.digest(input);
+        assertEquals(32, encodedHash.length);
+
+        final var hashValue = bytesToHex(encodedHash);
+        assertEquals(64, hashValue.length());
+        System.out.println(hashValue);
+    }
+
+    private byte[] getRandomNonce(final int numBytes) {
+        final var nonce = new byte[numBytes];
+        new SecureRandom().nextBytes(nonce);
+        return nonce;
     }
 
 }

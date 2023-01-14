@@ -338,6 +338,12 @@ Hashing algorithms characteristics:
 A good hash algorithm should be collision-free and a very small input value change should result in a completely
 different output hash value.
 
+- Add salt to SHA Hashing
+
+The [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) is a random data, a technique to prevent
+[rainbow attacks](https://en.wikipedia.org/wiki/Rainbow_table). In Java, we can use `SecureRandom` to generate a salt
+(random bytes).
+
 ---
 
 ### Chapter 04 - The Ledger
