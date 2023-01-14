@@ -34,13 +34,15 @@ technology — a distributed ledger enforced by a disparate network of computers
 2. IntelliJ Project Setup
 3. Hash Function
 4. The Ledger
-5. Public keys, Secret Keys and Digital Signature
-6. Blockchain - Mining
-7. Consensus Protocol
-8. Byzantine Generals Problem
-9. Proof-Of-Work (PoW)
-10. Proof-Of-Stake (PoS)
-11. Blockchain Implementations
+    - Traditional centralized ledger
+    - Public keys, Secret Keys and Digital Signature
+    - Decentralized ledger
+5. Blockchain - Mining
+6. Consensus Protocol
+7. Byzantine Generals Problem
+8. Proof-Of-Work (PoW)
+9. Proof-Of-Stake (PoS)
+10. Blockchain Implementations
 
 ### Part II - Cryptocurrency
 
@@ -351,16 +353,42 @@ The [salt](https://en.wikipedia.org/wiki/Salt_(cryptography)) is a random data, 
 A ledger is the principal book or computer file for recording and totaling economic transactions measured in terms of a
 monetary unit of account by account type.
 
-Each transaction or record on the ledger is stored in a “block.” For example, blocks on the Bitcoin blockchain consist
-of an average of more than 500 Bitcoin transactions.
+#### Traditional centralized ledger
 
 As a society, we created ledgers to store information — and they have a variety of applications. For example, we use
 ledgers in real estate to store a house’s records, such as when alterations were made or the house was sold. We also use
 ledgers in bookkeeping to record all the transactions a company makes.
 
-Records stored using traditional ledgers are easy to tamper with, meaning we can easily edit, remove, or add a record.
-As a result, we’re less likely to trust that the information is accurate.
+For example - suppose there are 4 friends in a university hostel sharing a room. They keep a record of all payments done
+amongst each other every day (if any). This record book is kept at a common cupboard and anyone can access it, read it,
+write it and append the transactions at the end.
+
+It's good to have a record / ledger like above until they all trust each other but in the real world, records stored
+using traditional ledgers are easy to tamper with, meaning we can easily edit, remove, or add a record. As a result,
+we’re less likely to trust that the information is accurate.
+
+#### Public keys, Secret Keys and Digital Signature
+
+Digital Signature is a technique for ensuring:
+
+- Integrity: the message hasn't been altered in transit
+- Authenticity: the author of the message is really who they claim to be
+- Non-repudiation: the author of the message can't later deny that they were the source
+
+Technically speaking, a digital signature is the encrypted hash (digest, checksum) of a message. That means we generate
+a hash from a message and encrypt it with a **private key** according to a chosen algorithm.
+
+The message, the encrypted hash, the corresponding public key, and the algorithm are all then sent. This is classified
+as a message with its digital signature.
+
+#### Decentralized ledger
 
 Blockchains solve these problems – and the way we trust – by evolving the traditional bookkeeping model to triple-entry
 bookkeeping: transactions on a blockchain are cryptographically sealed by a third entry. This creates a tamper-proof
 record of transactions stored in blocks and verified by a distributed consensus mechanism.
+
+Each transaction or record on the ledger is stored in a “block.” For example, blocks on the Bitcoin blockchain consist
+of an average of more than 500 Bitcoin transactions.
+
+
+
