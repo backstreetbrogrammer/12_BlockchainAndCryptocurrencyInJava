@@ -34,9 +34,13 @@ technology — a distributed ledger enforced by a disparate network of computers
 2. IntelliJ Project Setup
 3. Hash Function
 4. The Ledger
-5. Blockchain - Mining
-
-_work_in_progress_
+5. Public keys, Secret Keys and Digital Signature
+6. Blockchain - Mining
+7. Consensus Protocol
+8. Byzantine Generals Problem
+9. Proof-Of-Work (PoW)
+10. Proof-Of-Stake (PoS)
+11. Blockchain Implementations
 
 ### Part II - Cryptocurrency
 
@@ -83,7 +87,7 @@ increased system reliability and privacy. Moreover, such networks are much easie
 point of failure. The reason why Blockchain is distributed is because of shared communication and distributed
 processing.
 
-![Blockchain Decentralized](Blockchain1.png)
+![Blockchain Decentralized](Blockchain1.PNG)
 
 So me and my colleague can do the transaction in the blockchain network of computer buyers and sellers. Blockchain is
 a **trust-less** system without any third party => the blockchain itself guarantees trust.
@@ -93,7 +97,7 @@ trust it to be accurate. Being distributed protects the blockchain from network 
 
 #### How does Blockchain work
 
-![Blockchain Properties](Blockchain2.png)
+![Blockchain Properties](Blockchain2.PNG)
 
 In simpler words, a Blockchain is a continuous growing list of records called **blocks** that are linked and secured
 using cryptography.
@@ -132,7 +136,7 @@ inputting it into a formula. And so, the process repeats itself indefinitely.
 
 Similar example is described below:
 
-![Blockchain explained](BlockchainExplained.png)
+![Blockchain explained](BlockchainExplained.PNG)
 
 #### Key elements of a Blockchain
 
@@ -277,76 +281,6 @@ adoption, which can hugely benefit everyone, including the financial system.
 
 We can create a Maven project and add required dependencies.
 
-```
-    <dependencies>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>31.1-jre</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-            <version>1.15</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>${junit-platform.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.24.1</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-```
-
 Complete `pom.xml` can be found at Github:
 [pom.xml](https://github.com/backstreetbrogrammer/12_BlockchainAndCryptocurrencyInJava/blob/main/pom.xml)
 
@@ -360,7 +294,7 @@ Run Maven Verify command to ensure Maven setup is complete: `mvn verify`
 form. It takes a piece of information and passes it through a function that performs mathematical operations on the
 plaintext. This function is called the **hash function**, and the output is called the **hash value** or **digest**.
 
-![Hash Function](Hash1.png)
+![Hash Function](Hash1.PNG)
 
 The **SHA** (Secure Hash Algorithm) is one of the popular cryptographic hash functions. A cryptographic hash can be used
 to make a signature for a text or a data file.
@@ -408,3 +342,19 @@ different output hash value.
 
 ### Chapter 04 - The Ledger
 
+A ledger is the principal book or computer file for recording and totaling economic transactions measured in terms of a
+monetary unit of account by account type.
+
+Each transaction or record on the ledger is stored in a “block.” For example, blocks on the Bitcoin blockchain consist
+of an average of more than 500 Bitcoin transactions.
+
+As a society, we created ledgers to store information — and they have a variety of applications. For example, we use
+ledgers in real estate to store a house’s records, such as when alterations were made or the house was sold. We also use
+ledgers in bookkeeping to record all the transactions a company makes.
+
+Records stored using traditional ledgers are easy to tamper with, meaning we can easily edit, remove, or add a record.
+As a result, we’re less likely to trust that the information is accurate.
+
+Blockchains solve these problems – and the way we trust – by evolving the traditional bookkeeping model to triple-entry
+bookkeeping: transactions on a blockchain are cryptographically sealed by a third entry. This creates a tamper-proof
+record of transactions stored in blocks and verified by a distributed consensus mechanism.
