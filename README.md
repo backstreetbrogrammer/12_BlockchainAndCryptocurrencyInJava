@@ -42,7 +42,7 @@ technology — a distributed ledger enforced by a disparate network of computers
 7. Byzantine Generals Problem
 8. Proof-Of-Work (PoW)
 9. Proof-Of-Stake (PoS)
-10. Blockchain Implementations
+10. Full Blockchain implementation 
 
 ### Part II - Cryptocurrency
 
