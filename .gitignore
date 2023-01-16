@@ -4,6 +4,7 @@
 # Log file
 *.log
 *.ser
+central-ledger.txt
 
 # BlueJ files
 *.ctxt
