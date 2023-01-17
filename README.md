@@ -42,7 +42,7 @@ technology — a distributed ledger enforced by a disparate network of computers
 7. Byzantine Generals Problem
 8. Proof-Of-Work (PoW)
 9. Proof-Of-Stake (PoS)
-10. Full Blockchain implementation 
+10. Full Blockchain implementation
 
 ### Part II - Cryptocurrency
 
@@ -359,9 +359,9 @@ As a society, we created ledgers to store information — and they have a variet
 ledgers in real estate to store a house’s records, such as when alterations were made or the house was sold. We also use
 ledgers in bookkeeping to record all the transactions a company makes.
 
-For example - suppose there are 4 friends in a university hostel sharing a room. They keep a record of all payments done
-amongst each other every day (if any). This record book is kept at a common cupboard and anyone can access it, read it,
-write it and append the transactions at the end.
+For example - suppose there are 4 friends in a university. They keep a record of all payments done amongst each other
+every day (if any). This record book is kept at a common cupboard and anyone can access it, read it, write it and append
+the transactions at the end.
 
 It's good to have a record / ledger like above until they all trust each other but in the real world, records stored
 using traditional ledgers are easy to tamper with, meaning we can easily edit, remove, or add a record. As a result,
@@ -375,11 +375,31 @@ Digital Signature is a technique for ensuring:
 - Authenticity: the author of the message is really who they claim to be
 - Non-repudiation: the author of the message can't later deny that they were the source
 
-Technically speaking, a digital signature is the encrypted hash (digest, checksum) of a message. That means we generate
-a hash from a message and encrypt it with a **private key** according to a chosen algorithm.
+##### Sending a message with a Digital Signature
 
-The message, the encrypted hash, the corresponding public key, and the algorithm are all then sent. This is classified
-as a message with its digital signature.
+A digital signature is the encrypted hash (digest, checksum) of a message. We generate a hash from a message and encrypt
+it with a **private key** according to a chosen algorithm.
+
+A message with its digital signature being sent contains:
+
+- message
+- encrypted hash
+- corresponding public key
+- algorithm
+
+##### Receiving and checking a Digital Signature
+
+To check the digital signature:
+
+- the message receiver generates a new hash from the received message
+- decrypts the received encrypted hash using the public key
+- compares them
+- if they match, the Digital Signature is said to be verified
+
+We should note that we only decrypt the message hash, and not the message itself. In other words, Digital Signature
+doesn't try to keep the message secret. Our digital signature only proves that the message was not altered in transit.
+
+When the signature is verified, we're sure that only the owner of the private key could be the author of the message.
 
 #### Decentralized ledger
 

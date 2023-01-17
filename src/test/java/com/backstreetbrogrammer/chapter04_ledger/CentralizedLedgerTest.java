@@ -1,6 +1,7 @@
 package com.backstreetbrogrammer.chapter04_ledger;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ public class CentralizedLedgerTest {
     }
 
     @Test
-    void createTransactionsLedgerOnDay1() throws InterruptedException, IOException {
+    @DisplayName("Create transactions and write to the central ledger which is a file")
+    void createTransactionsAndWriteToCentralizedLedger() throws InterruptedException, IOException {
         final var transaction1 = new Transaction(1L, student1, student4, 50D, LocalDateTime.now());
         Files.writeString(centralLedgerPath, transaction1 + System.lineSeparator(), StandardOpenOption.CREATE,
                           StandardOpenOption.APPEND);

@@ -5,6 +5,7 @@
 *.log
 *.ser
 central-ledger.txt
+central-ledger-signature.txt
 
 # BlueJ files
 *.ctxt
