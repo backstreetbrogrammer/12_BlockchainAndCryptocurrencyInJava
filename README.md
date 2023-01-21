@@ -36,8 +36,8 @@ technology — a distributed ledger enforced by a disparate network of computers
 4. The Ledger
     - Traditional centralized ledger
     - Public keys, Secret Keys and Digital Signature
-    - Decentralized ledger
-5. Blockchain - Mining
+    - Decentralized and Distributed ledger
+5. Mining
 6. Consensus Protocol
 7. Byzantine Generals Problem
 8. Proof-Of-Work (PoW)
@@ -166,18 +166,18 @@ other. Transactions are only executed when programmed conditions are met by both
 Once the conditions programmed into a blockchain protocol are met, an initiated transaction cannot be undone, changed,
 or stopped. It’s going to execute and nothing – no bank, government, or third party – can stop it.
 
-5. Decentralized
-
-No single entity maintains the network. Unlike centralized banks, decisions on the blockchain are made via consensus.
-Decentralization is essential because it ensures people can easily access and build on the platform, and there are
-multiple points of failure.
-
-6. Lower Cost
+5. Lower Cost
 
 In the traditional finance system, we pay third parties like banks to process transactions. The blockchain eliminates
 these intermediaries and reduces fees, with some systems returning fees to miners and stakers.
 
-7. Peer-to-Peer
+6. Decentralized and Peer-to-Peer (P2P)
+
+![Decentralized and Distributed Network](DistributedNetwork.PNG)
+
+No single entity maintains the network. Unlike centralized banks, decisions on the blockchain are made via consensus.
+Decentralization is essential because it ensures people can easily access and build on the platform, and there are
+multiple points of failure.
 
 A **peer-to-peer (P2P)** network is a simple network of computers. Here each computer acts as a node for file sharing
 within the formed network. Here each node acts as a server and thus there is no central server in the network. This
@@ -192,19 +192,19 @@ Blockchains a relatively high degree of resistance to malicious activities.
 Cryptocurrencies like Bitcoin, let us send money directly to anyone, anywhere in the world, without an intermediary like
 a bank charging transaction or handling fees.
 
-8. Transparent
+7. Transparent
 
 Public blockchains are open-source software, so anyone can access them to view transactions and their source code. They
 can even use the code to build new applications and suggest improvements to the code. Suggestions are accepted or
 rejected via consensus.
 
-9. Smart contracts
+8. Smart contracts
 
 To speed transactions, a set of rules — called a smart contract — is stored on the blockchain and executed
 automatically. A smart contract can define conditions for corporate bond transfers, include terms for travel insurance
 to be paid and much more.
 
-10. Universal Banking
+9. Universal Banking
 
 Billions of people globally do not have a bank account. Because anyone can access the blockchain to store money, it’s a
 great way to bank the unbanked and protect against theft that can happen due to holding cash in physical locations.
@@ -375,6 +375,8 @@ Digital Signature is a technique for ensuring:
 - Authenticity: the author of the message is really who they claim to be
 - Non-repudiation: the author of the message can't later deny that they were the source
 
+![Digital Signature](DigitalSignature.PNG)
+
 ##### Sending a message with a Digital Signature
 
 A digital signature is the encrypted hash (digest, checksum) of a message. We generate a hash from a message and encrypt
@@ -401,14 +403,33 @@ doesn't try to keep the message secret. Our digital signature only proves that t
 
 When the signature is verified, we're sure that only the owner of the private key could be the author of the message.
 
-#### Decentralized ledger
+#### Decentralized and Distributed ledger
 
 Blockchains solve these problems – and the way we trust – by evolving the traditional bookkeeping model to triple-entry
 bookkeeping: transactions on a blockchain are cryptographically sealed by a third entry. This creates a tamper-proof
 record of transactions stored in blocks and verified by a distributed consensus mechanism.
 
+![Distributed Ledger](DistributedLedger.PNG)
+
 Each transaction or record on the ledger is stored in a “block.” For example, blocks on the Bitcoin blockchain consist
 of an average of more than 500 Bitcoin transactions.
+
+If someone **tampers** the data in a block: the cryptographic hash changes as well and thus the hash pointers between
+the blocks are broken. Moreover, the data that has been written to a block cannot be changed or erased as the blocks
+are "
+immutable".
+
+If someone tries to **add** a fake transaction to the blockchain - that will require a **consensus** from the blockchain
+miners to approve it and then only add it to the block. As discussed in the digital signature section - this is
+impossible to gain consensus on a fake transaction, and it will be disapproved by the miners and not added to the
+blockchain.
+
+---
+
+### Chapter 05 - Mining
+
+
+
 
 
 

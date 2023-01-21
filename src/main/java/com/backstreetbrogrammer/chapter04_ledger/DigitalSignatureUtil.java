@@ -20,7 +20,8 @@ public class DigitalSignatureUtil {
         return keyPairGenerator.generateKeyPair();
     }
 
-    public static byte[] createDigitalSignature(final byte[] input, final PrivateKey Key) {
+    public static byte[] createDigitalSignature(final byte[] input,
+                                                final PrivateKey Key) {
         try {
             final var signature = Signature.getInstance(SigningAlgorithms.SHA256withRSA.getAlgorithm());
             signature.initSign(Key);

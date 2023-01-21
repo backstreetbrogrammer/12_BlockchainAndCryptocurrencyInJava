@@ -9,8 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.security.PrivateKey;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -30,6 +34,8 @@ public class CentralizedLedgerWithSignatureTest {
 
     private final List<StudentWithDigitalSignature> students = List.of(student1, student2, student3, student4);
 
+    private final AtomicLong transactionId = new AtomicLong();
+
     @BeforeEach
     void setUp() throws IOException {
         if (centralLedgerPath.toFile().exists()) {
@@ -41,46 +47,46 @@ public class CentralizedLedgerWithSignatureTest {
     @Test
     @DisplayName("Create transactions and verify it using digital signature before writing to the central ledger")
     void createTransactionsAndVerifyUsingSignatureAndWriteToCentralizedLedger() throws InterruptedException, IOException {
-        final var transaction1 = student1.transact(student4, 50D);
-        if (verifyTransaction(transaction1)) {
-            transaction1.setStudentsCash();
-            Files.writeString(centralLedgerPath, transaction1 + System.lineSeparator(), StandardOpenOption.CREATE,
-                              StandardOpenOption.APPEND);
-        }
-        TimeUnit.MILLISECONDS.sleep(10L);
-
-        final var transaction2 = student3.transact(student2, 20D);
-        if (verifyTransaction(transaction2)) {
-            transaction2.setStudentsCash();
-            Files.writeString(centralLedgerPath, transaction2 + System.lineSeparator(), StandardOpenOption.CREATE,
-                              StandardOpenOption.APPEND);
-        }
-        TimeUnit.MILLISECONDS.sleep(30L);
-
-        final var transaction3 = student2.transact(student1, 30D);
-        if (verifyTransaction(transaction3)) {
-            transaction3.setStudentsCash();
-            Files.writeString(centralLedgerPath, transaction3 + System.lineSeparator(), StandardOpenOption.CREATE,
-                              StandardOpenOption.APPEND);
-        }
-        TimeUnit.MILLISECONDS.sleep(20L);
-
-        final var transaction4 = student4.transact(student3, 40D);
-        if (verifyTransaction(transaction4)) {
-            transaction4.setStudentsCash();
-            Files.writeString(centralLedgerPath, transaction4 + System.lineSeparator(), StandardOpenOption.CREATE,
-                              StandardOpenOption.APPEND);
-        }
-        TimeUnit.MILLISECONDS.sleep(40L);
-
-        final var transaction5 = student1.transact(student2, 80D);
-        if (verifyTransaction(transaction5)) {
-            transaction5.setStudentsCash();
-            Files.writeString(centralLedgerPath, transaction5 + System.lineSeparator(), StandardOpenOption.CREATE,
-                              StandardOpenOption.APPEND);
-        }
+        transactAndWriteToLedger(student1, student4, 50D);
+        transactAndWriteToLedger(student3, student2, 20D);
+        transactAndWriteToLedger(student2, student1, 30D);
+        transactAndWriteToLedger(student4, student3, 40D);
+        transactAndWriteToLedger(student1, student2, 80D);
 
         students.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("Create fake transactions which fails digital signature verification and thus not written to the " +
+            "central ledger")
+    void createFakeTransactionAndVerifyItAsInvalid() {
+        final var fakeTransaction = new TransactionWithDigitalSignature(transactionId.addAndGet(1L),
+                                                                        student2,
+                                                                        student1,
+                                                                        100D,
+                                                                        LocalDateTime.now());
+        final var keyPair = DigitalSignatureUtil.generateKeyPair();
+        PrivateKey privateKey = null;
+        if (keyPair != null) {
+            privateKey = keyPair.getPrivate();
+        }
+        final var digitalSignature
+                = DigitalSignatureUtil.createDigitalSignature(fakeTransaction.toString().getBytes(StandardCharsets.UTF_8),
+                                                              privateKey);
+        fakeTransaction.setDigitalSignature(digitalSignature);
+        assertFalse(verifyTransaction(fakeTransaction));
+    }
+
+    private void transactAndWriteToLedger(final StudentWithDigitalSignature sender,
+                                          final StudentWithDigitalSignature receiver,
+                                          final double amount) throws IOException, InterruptedException {
+        final var transaction = sender.transact(transactionId.addAndGet(1L), receiver, amount);
+        if (verifyTransaction(transaction)) {
+            transaction.setStudentsCash();
+            Files.writeString(centralLedgerPath, transaction + System.lineSeparator(), StandardOpenOption.CREATE,
+                              StandardOpenOption.APPEND);
+        }
+        TimeUnit.MILLISECONDS.sleep(ThreadLocalRandom.current().nextLong(10L, 50L));
     }
 
     private boolean verifyTransaction(final TransactionWithDigitalSignature transaction) {

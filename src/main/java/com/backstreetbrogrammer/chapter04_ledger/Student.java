@@ -8,7 +8,10 @@ public final class Student {
 
     private double totalCash = 200D;
 
-    public Student(final String studentId, final String firstName, final String lastName, final int age) {
+    public Student(final String studentId,
+                   final String firstName,
+                   final String lastName,
+                   final int age) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;

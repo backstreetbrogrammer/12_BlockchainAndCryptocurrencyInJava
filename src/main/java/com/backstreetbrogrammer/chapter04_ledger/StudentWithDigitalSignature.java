@@ -72,8 +72,10 @@ public final class StudentWithDigitalSignature {
                 '}';
     }
 
-    public TransactionWithDigitalSignature transact(final StudentWithDigitalSignature receiver, final double amount) {
-        final var transaction = new TransactionWithDigitalSignature(UUID.randomUUID().toString(),
+    public TransactionWithDigitalSignature transact(final long transactionId,
+                                                    final StudentWithDigitalSignature receiver,
+                                                    final double amount) {
+        final var transaction = new TransactionWithDigitalSignature(transactionId,
                                                                     this,
                                                                     receiver,
                                                                     amount,

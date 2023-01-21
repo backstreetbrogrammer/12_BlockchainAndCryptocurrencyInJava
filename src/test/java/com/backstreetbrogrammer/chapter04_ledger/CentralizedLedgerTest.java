@@ -10,7 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -26,6 +28,8 @@ public class CentralizedLedgerTest {
 
     private final List<Student> students = List.of(student1, student2, student3, student4);
 
+    private final AtomicLong transactionId = new AtomicLong();
+
     @BeforeEach
     void setUp() throws IOException {
         if (centralLedgerPath.toFile().exists()) {
@@ -35,34 +39,25 @@ public class CentralizedLedgerTest {
     }
 
     @Test
-    @DisplayName("Create transactions and write to the central ledger which is a file")
+    @DisplayName("Create transactions and write to the central ledger file")
     void createTransactionsAndWriteToCentralizedLedger() throws InterruptedException, IOException {
-        final var transaction1 = new Transaction(1L, student1, student4, 50D, LocalDateTime.now());
-        Files.writeString(centralLedgerPath, transaction1 + System.lineSeparator(), StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
-        TimeUnit.MILLISECONDS.sleep(10L);
-
-        final var transaction2 = new Transaction(2L, student3, student2, 20D, LocalDateTime.now());
-        Files.writeString(centralLedgerPath, transaction2 + System.lineSeparator(), StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
-        TimeUnit.MILLISECONDS.sleep(30L);
-
-        final var transaction3 = new Transaction(3L, student2, student1, 30D, LocalDateTime.now());
-        Files.writeString(centralLedgerPath, transaction3 + System.lineSeparator(), StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
-        TimeUnit.MILLISECONDS.sleep(20L);
-
-        final var transaction4 = new Transaction(4L, student4, student3, 40D, LocalDateTime.now());
-        Files.writeString(centralLedgerPath, transaction4 + System.lineSeparator(), StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
-        TimeUnit.MILLISECONDS.sleep(40L);
-
-        final var transaction5 = new Transaction(5L, student1, student2, 80D, LocalDateTime.now());
-        Files.writeString(centralLedgerPath, transaction5 + System.lineSeparator(), StandardOpenOption.CREATE,
-                          StandardOpenOption.APPEND);
+        transactAndWriteToLedger(student1, student4, 50D);
+        transactAndWriteToLedger(student3, student2, 20D);
+        transactAndWriteToLedger(student2, student1, 30D);
+        transactAndWriteToLedger(student4, student3, 40D);
+        transactAndWriteToLedger(student1, student2, 80D);
 
         students.forEach(System.out::println);
     }
 
+    private void transactAndWriteToLedger(final Student sender,
+                                          final Student receiver,
+                                          final double amount) throws IOException, InterruptedException {
+        final var transaction = new Transaction(transactionId.addAndGet(1L), sender, receiver, amount,
+                                                LocalDateTime.now());
+        Files.writeString(centralLedgerPath, transaction + System.lineSeparator(), StandardOpenOption.CREATE,
+                          StandardOpenOption.APPEND);
+        TimeUnit.MILLISECONDS.sleep(ThreadLocalRandom.current().nextLong(10L, 50L));
+    }
 
 }

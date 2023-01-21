@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public final class TransactionWithDigitalSignature {
 
-    private final String transactionId;
+    private final long transactionId;
     private final StudentWithDigitalSignature sender;
     private final StudentWithDigitalSignature receiver;
     private final double amount;
@@ -12,7 +12,7 @@ public final class TransactionWithDigitalSignature {
 
     private byte[] digitalSignature;
 
-    public TransactionWithDigitalSignature(final String transactionId,
+    public TransactionWithDigitalSignature(final long transactionId,
                                            final StudentWithDigitalSignature sender,
                                            final StudentWithDigitalSignature receiver,
                                            final double amount,
@@ -24,7 +24,7 @@ public final class TransactionWithDigitalSignature {
         this.transactionTime = transactionTime;
     }
 
-    public String getTransactionId() {
+    public long getTransactionId() {
         return transactionId;
     }
 
