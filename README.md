@@ -416,17 +416,92 @@ of an average of more than 500 Bitcoin transactions.
 
 If someone **tampers** the data in a block: the cryptographic hash changes as well and thus the hash pointers between
 the blocks are broken. Moreover, the data that has been written to a block cannot be changed or erased as the blocks
-are "
-immutable".
+are "immutable".
 
 If someone tries to **add** a fake transaction to the blockchain - that will require a **consensus** from the blockchain
 miners to approve it and then only add it to the block. As discussed in the digital signature section - this is
 impossible to gain consensus on a fake transaction, and it will be disapproved by the miners and not added to the
 blockchain.
 
+![Bitcoin Transaction](BitcoinTransactionExample.PNG)
+
 ---
 
 ### Chapter 05 - Mining
+
+Mining is the process of verifying transactions and recording them onto the public decentralized and distributed ledger,
+i.e. Blockchain. There is no centralized authority, any user with mining hardware and internet access can take part.
+
+Mining process is solved based on a difficult mathematical puzzle which requires huge computation power and electricity
+to solve and is called **proof-of-work (PoW)**.
+
+The miner who first solves the puzzle gets rewarded.
+
+![Mining example](MiningExample.PNG)
+
+#### Mining Difficulty
+
+Using SHA-256 Hashing algorithm, 1 hash takes 256 bits of memory with 0 or 1 bit value. It means the total number of
+hashes possible is 2^256.
+
+The same hash in hexadecimal format takes 64 characters as each character takes 4 bits of memory. It means the total
+number of hashes possible is 16^64 which is equal to 2^256.
+
+In Blockchain mining, **difficulty** is defined as **leading zeros** in generated hash. This restricts the total number
+of generated SHA-256 hash values possible.
+
+For ex: Suppose predefined condition in the mining of the new block is to have target hash with 3 leading zeros.
+
+It means that miners will keep generating hash until they find the target hash with 3 leading zeros, say,
+`0002467734ac34ff79b98da536831fcea82a0fb3f94b34c2e58ab08f041d5d16`
+
+If higher number of leading zeros are required => more difficult is to calculate the hash.
+
+```
+Probability of finding hash with 1 leading zero 
+= hashes with 1 leading zero / total number of hashes
+= 16^63 / 16^64
+= 1 / 16
+= 6.25%
+
+Probability of finding hash with 2 leading zero 
+= hashes with 2 leading zero / total number of hashes
+= 16^62 / 16^64
+= 1 / 256
+= 0.390625%
+
+Probability of finding hash with 3 leading zero 
+= hashes with 3 leading zero / total number of hashes
+= 16^61 / 16^64
+= 1 / 4096
+= 0.0244140625%
+```
+
+#### NONCE: Number Only Used Once
+
+To generate hash to meet the target hash, miners change the **NONCE** value of the block as all the other data like
+block id, transactions, merkle root, previous hash etc. are immutable.
+
+Nonce is a 32-bit unsigned integer (only positive): thus the range is [0 to 2^32-1] or [0 to 4294967295]
+
+When the nonce is changed, miners get a new hash, and then they compare it with target hash (with leading zeros).
+
+If the hash doesn't satisfy the target hash, new nonce is created and continue the hash -> check target.
+
+So, the nonce may be started from 0 and incremented by 1 until the target hash is computed.
+
+```
+Block block = new Block();
+...
+...
+int nonce = -1;
+String hash = null;
+do {
+    nonce++;
+    block.setNonce(nonce);
+    hash = generateHash(block);
+} while(!isTargetHashComputed(hash));
+```
 
 
 
