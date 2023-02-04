@@ -23,35 +23,44 @@ technology — a distributed ledger enforced by a disparate network of computers
 
 ## Table of contents
 
-### Part I - Blockchain
-
-1. Blockchain - The Big Picture
+1. Brief History of Currency
+    - Barter System
+    - Gold
+    - Paper Money
+    - Gold Standard
+    - Bretton Woods
+2. Forex Market
+    - Make Money
+    - Currency Pairs
+    - Major Pairs & Cross Pairs
+    - Price, Pips & Lots
+    - Leverage
+    - Short Selling
+    - Market Structure
+3. Blockchain & Cryptocurrency - The Big Picture
     - Blockchain Demystified
     - How does Blockchain work
     - Bitcoin example
     - Key elements of a Blockchain
     - Disadvantages of a Blockchain
-2. IntelliJ Project Setup
-3. Hash Function
-4. The Ledger
+4. IntelliJ Project Setup
+5. Hash Function
+6. The Ledger
     - Traditional centralized ledger
     - Public keys, Secret Keys and Digital Signature
     - Decentralized and Distributed ledger
-5. Mining
-6. Consensus Protocol
-7. Byzantine Generals Problem
-8. Proof-Of-Work (PoW)
-9. Proof-Of-Stake (PoS)
-10. Full Blockchain implementation
-
-### Part II - Cryptocurrency
-
-1. Cryptocurrency - The Big Picture
-2. History of currency
-3. The Forex Market
-4. Mempools
-
-_work_in_progress_
+7. Mining
+    - Consensus Protocol
+    - Byzantine Generals Problem
+    - Proof-Of-Work (PoW)
+    - Proof-Of-Stake (PoS)
+8. Mempools
+9. Merkle-Tree
+10. Elliptic Curve Cryptography
+11. UTXOs & Wallets
+12. Block verifications
+13. Fork
+14. Full Cryptocurrency implementation
 
 ### Youtube
 

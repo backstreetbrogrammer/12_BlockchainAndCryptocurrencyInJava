@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 public final class StudentWithDigitalSignature {
     private final String studentId;
