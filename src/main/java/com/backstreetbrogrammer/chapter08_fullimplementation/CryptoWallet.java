@@ -10,13 +10,21 @@ import java.util.List;
 
 public class CryptoWallet {
 
-    private PrivateKey privateKey;
-    private PublicKey publicKey;
+    private final PrivateKey privateKey;
+    private final PublicKey publicKey;
 
     public CryptoWallet() {
         final var keyPair = CryptoUtils.generateKeyPair();
         privateKey = keyPair.getPrivate();
         publicKey = keyPair.getPublic();
+    }
+
+    public PrivateKey getPrivateKey() {
+        return privateKey;
+    }
+
+    public PublicKey getPublicKey() {
+        return publicKey;
     }
 
     public double calculateBalance() {

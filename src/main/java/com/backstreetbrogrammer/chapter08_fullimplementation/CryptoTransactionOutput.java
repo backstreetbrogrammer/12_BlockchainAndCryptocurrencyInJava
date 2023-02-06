@@ -53,4 +53,13 @@ public class CryptoTransactionOutput {
     public void setAmount(final double amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "CryptoTransactionOutput{" +
+                "id='" + id + '\'' +
+                ", parentTransactionId='" + parentTransactionId + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }

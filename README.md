@@ -49,14 +49,14 @@ technology — a distributed ledger enforced by a disparate network of computers
     - Traditional centralized ledger
     - Public keys, Secret Keys and Digital Signature
     - Decentralized and Distributed ledger
-7. Mining
+7. Elliptic Curve Cryptography
+8. Mining
     - Consensus Protocol
     - Byzantine Generals Problem
     - Proof-Of-Work (PoW)
     - Proof-Of-Stake (PoS)
-8. Mempools
-9. Merkle-Tree
-10. Elliptic Curve Cryptography
+9. Mempools
+10. Merkle-Tree
 11. UTXOs & Wallets
 12. Block verifications
 13. Fork

@@ -26,7 +26,10 @@ public class CryptoTransaction {
         this.sender = sender;
         this.receiver = receiver;
         this.amount = amount;
-        this.inputs.addAll(inputs);
+
+        if (inputs != null) {
+            this.inputs.addAll(inputs);
+        }
         calculateHash();
     }
 
@@ -41,6 +44,32 @@ public class CryptoTransaction {
         this.signature = signature;
         this.inputs.addAll(inputs);
         calculateHash();
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(final String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public PublicKey getReceiver() {
+        return receiver;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public List<CryptoTransactionOutput> getOutputs() {
+        return outputs;
+    }
+
+    public void addTransactionOutput(final CryptoTransactionOutput output) {
+        if (output != null) {
+            outputs.add(output);
+        }
     }
 
     private void calculateHash() {
@@ -93,5 +122,13 @@ public class CryptoTransaction {
                      .sum();
     }
 
-
+    @Override
+    public String toString() {
+        return "CryptoTransaction{" +
+                "transactionId='" + transactionId + '\'' +
+                ", amount=" + amount +
+                ", inputs=" + inputs +
+                ", outputs=" + outputs +
+                '}';
+    }
 }

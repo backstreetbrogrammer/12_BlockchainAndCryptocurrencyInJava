@@ -27,4 +27,5 @@ public class CryptoTransactionInput {
     public void setUTXO(final CryptoTransactionOutput UTXO) {
         this.UTXO = UTXO;
     }
+
 }
