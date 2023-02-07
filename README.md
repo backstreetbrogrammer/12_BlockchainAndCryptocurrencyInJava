@@ -70,9 +70,51 @@ technology — a distributed ledger enforced by a disparate network of computers
 
 ---
 
-## Part I - Blockchain
+### Chapter 01 - Brief History of Currency
 
-### Chapter 01 - Blockchain - The Big Picture
+#### Barter System
+
+Started as early as 6000 BC, Barter is the trade of goods or services between two or more people that does not include
+the use of money or a monetary device such as a credit card. Trading is defined as one party providing one good or
+service in exchange for another party providing a different good or service. A simple example of a barter relationship
+is a plumber who builds a fence for a farmer working 10 hours per month. Instead of paying the plumber $1,000 in cash
+for labor and supplies, the farmer may reimburse the plumber with 2 litres of milk per day.
+
+![Barter System](Barter.PNG)
+
+Drawbacks of Barter System:
+
+- need to find people what we actually want: an individual looking for wood will be unable to find a provider of timber
+  who is needing something the timber searcher can give.
+- to ensure fair trades: how can one compute, for instance, a fair swapping scale of eggs for a TV?
+
+#### Gold
+
+Need for a common unit of exchange:
+
+- be used as a medium of exchange
+- store value
+- be a unit of value
+
+Gold is a good unit of exchange because it is scarce, hard to harvest or mine and durable. Thus, around 700 BC -  
+Gold was started to be used as common unit of exchange.
+
+Drawbacks of using Gold:
+
+- issues with having multiple denominations
+- can be debased
+- can fluctuate based on supply: like [California Gold Rush](https://en.wikipedia.org/wiki/California_Gold_Rush)
+- limited supply and hard to transport
+
+#### Paper Bills
+
+Paper bills = 618-907 BC, Gold Standard = 1879, Bretton Woods = 1944, End of Gold Standard = 1971
+
+
+
+---
+
+### Chapter 03 - Blockchain - The Big Picture
 
 #### Blockchain Demystified
 
@@ -512,8 +554,61 @@ do {
 } while(!isTargetHashComputed(hash));
 ```
 
+---
 
+### Chapter 07 - Elliptic Curve Cryptography
 
+Bitcoin uses Elliptic Curve Cryptography because there are some problems with RSA cryptosystem.
 
+#### RSA cryptosystem
+
+RSA (Rivest–Shamir–Adleman) is a public-key cryptosystem that is widely used for secure data transmission. The acronym "
+RSA" comes from the surnames of Ron Rivest, Adi Shamir and Leonard Adleman, who publicly described the algorithm in
+
+1977.
+
+In a public-key cryptosystem, the encryption key is public and distinct from the decryption key, which is kept secret
+(private). An RSA user creates and publishes a public key based on two large prime numbers, along with an auxiliary
+value. The prime numbers are kept secret. Messages can be encrypted by anyone, via the public key, but can only be
+decoded by someone who knows the prime numbers.
+
+The security of RSA relies on the practical difficulty of factoring the product of two large prime numbers, the
+"factoring problem". Factorization is the trap-door function in RSA but it has never been proven that factorization is
+hard. In number theory, the general number field sieve (GNFS) is the most efficient classical algorithm known for
+factoring integers larger than 10^100.
+
+There are no published methods to defeat the system if a large enough key is used. Thus, we need huge prime numbers.
+
+RSA is a relatively slow algorithm. Because of this, it is not commonly used to directly encrypt user data. More often,
+RSA is used to transmit shared keys for symmetric-key cryptography, which are then used for bulk encryption–decryption.
+
+#### Elliptic Curves
+
+A non-singular elliptic curve has the following features:
+
+- symmetric along x-axis
+- a straight line meets the x-axis either at 1 or 3 points
+
+Equation:
+
+```
+Let a and b be real numbers.
+
+An elliptic curve E over the field of real numbers R is the set of points (x,y) with x and y in R that satisfy the 
+equation: 
+
+y^2 = x^3 + a.x + b
+
+If 
+4.a^3 + 27.b^3 = 0
+then, elliptic curve is singular which means it does not have 3 distinct roots.
+```
+
+Examples:
+
+![Elliptic Curve](EllipticCurve.PNG)
+
+We can use this [link](https://www.desmos.com/calculator/ialhd71we3) to tune around constants a and b and see the
+corresponding elliptic curves.
 
 
